@@ -9,9 +9,10 @@ def update_phone_numbers(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
 
     for flat in Flat.objects.all():
-        print(flat.id)
-        flat.owner_pure_phone = phonenumbers.parse(flat.owners_phonenumber, 'RU')
-        flat.save()
+        parsed_num = phonenumbers.parse(flat.owners_phonenumber, 'RU')
+        if phonenumbers.is_valid_number(parsed_num):
+            flat.owner_pure_phone = parsed_num
+            flat.save()
 
 def update_phone_numbers_reverse(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
