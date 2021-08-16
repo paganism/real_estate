@@ -39,9 +39,9 @@ class Complaint(models.Model):
     def __str__(self):
         return f"{self.complained_user} {self.complained_flat} {self.compliat_text[:50]}"
 
+
 class Owner(models.Model):
     owner = models.CharField("ФИО владельца", max_length=200)
     owners_phonenumber = models.CharField(max_length=20, verbose_name="Номер владельца")
     owner_pure_phone = PhoneNumberField(null=True, blank=True, verbose_name="Нормализованный номер владельца")
-    flats = models.ManyToManyField(Flat, related_name="flats_owners", verbose_name="Квартиры в собственности", through="ownership", db_index=True)
-    
+    flats = models.ManyToManyField(Flat, related_name="flats_owners", verbose_name="Квартиры в собственности", db_index=True)

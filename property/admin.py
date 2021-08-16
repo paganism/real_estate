@@ -4,7 +4,8 @@ from .models import Flat, Complaint, Owner
 
 
 class FlatOwnershipInline(admin.TabularInline):
-    model = Owner.flats.through
+    model = Flat.flats_owners.through
+    raw_id_fields = ('flat', 'owner',)
 
 
 class FlatAdmin(admin.ModelAdmin):
@@ -14,9 +15,9 @@ class FlatAdmin(admin.ModelAdmin):
     list_editable = ('new_building',)
     list_filter = ('new_building', 'has_balcony', 'rooms_number',)
     raw_id_fields = ('who_liked',)
-    inlines = ['FlatOwnershipInline',]
+    inlines = [FlatOwnershipInline]
 
-admin.site.register(Flat, FlatAdmin, FlatOwnershipInline)
+admin.site.register(Flat, FlatAdmin)
 
 
 class ComplaintAdmin(admin.ModelAdmin):
