@@ -23,7 +23,7 @@ class Flat(models.Model):
     has_balcony = models.NullBooleanField("Наличие балкона", db_index=True)
     active = models.BooleanField("Активно-ли объявление", db_index=True)
     construction_year = models.IntegerField("Год постройки здания", null=True, blank=True, db_index=True)
-    new_building = models.NullBooleanField()
+    new_building = models.NullBooleanField(db_index=True)
 
     who_liked = models.ManyToManyField(User, verbose_name="Кто лайкнул")
 
